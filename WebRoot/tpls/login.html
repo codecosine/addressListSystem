@@ -1,0 +1,38 @@
+<div class="login_bg container">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="login_box col-sm-8" >
+			<form class="form-horizontal" name="loginform" ng-controller="loginCtrl" ng-submit="login(userInfo)">
+				<div class="form-group">
+					<label class="col-sm-5 control-label h3"><strong>学生通讯录管理系统</strong></label>
+				</div>
+				<div class="form-group">
+					<label for="inputUser" class="col-sm-5 control-label"><strong>学号</strong></label>
+					<div class="col-sm-5">
+						<input type="text" ng-model="userInfo.username" class="form-control" id="inputUser" placeholder="3114004923" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-5 control-label text_title"><strong>密码</strong></label>
+					<div class="col-sm-5">
+						<input type="password" ng-model="userInfo.password" class="form-control" id="inputPassword3" placeholder="Password" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-5">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> <strong>RemeberMe(BETA)</strong>
+							</label>
+							<button type="submit" class="btn btn-primary" >登录</button>
+							<button type="button" ng-click="resetForm()" class="btn btn-info">重置</button>
+
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+	</div>
+</div>
