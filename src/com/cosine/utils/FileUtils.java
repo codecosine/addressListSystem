@@ -1,4 +1,4 @@
-package com.cosine.dao;
+package com.cosine.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,12 +14,12 @@ import java.io.OutputStreamWriter;
  * @author Administrator
  *
  */
-public class ConnectUtils {
-	private BufferedReader reader = null;
-	private BufferedWriter writer = null;
+public class FileUtils {
+	private static BufferedReader reader = null;
+	private static BufferedWriter writer = null;
 	
 	
-	public void writeJson(String path,String jsondata){
+	public static void writeJson(String path,String jsondata){
 		 try{
 			FileOutputStream fileOutputStream = new FileOutputStream(path);
 			OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
@@ -37,7 +37,7 @@ public class ConnectUtils {
 		 }
 			
 	}
-	public String readJson(String path){
+	public static String readJson(String path){
 		String datastr = "";
 		 try{
 			 FileInputStream fileInputStream = new FileInputStream(path);
