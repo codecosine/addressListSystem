@@ -7,7 +7,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
   
 public class ParseMD5 {
-
+	public static String test(){
+		return "test";
+	}
 	/**
 	 * @param str
 	 * @return

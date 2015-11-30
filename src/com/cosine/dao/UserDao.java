@@ -22,7 +22,7 @@ public class UserDao {
 	}
 	public boolean add(User power,User user){
 		isCommit = false;
-		if(isAdmin(user)){
+		if(isAdmin(power)){
 			return group.add(user);
 
 		}
@@ -30,7 +30,7 @@ public class UserDao {
 	}
 	public boolean remove(User power,User user){
 		isCommit = false;
-		if(isAdmin(user)){
+		if(isAdmin(power)){
 			return group.remove(user);
 
 		}
@@ -49,7 +49,7 @@ public class UserDao {
 	}
 	public boolean isAdmin(User user){
 		User admin = new User("cosine","cosine","admin");
-		return user==admin;
+		return user.equals(admin);
 	}
 	public boolean editPassWord(User oldpass,User newpass){	
 		isCommit = false;

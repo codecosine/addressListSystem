@@ -1,4 +1,6 @@
 package com.cosine.services;
+import org.junit.Test;
+
 import com.cosine.dao.UserDao;
 import com.cosine.domain.User;
 /**
@@ -21,11 +23,16 @@ public class UserServices {
 		}
 		return us;
 	}
+	@Test
 	public void init(){
-		String path = UserServices.class.getResource("").getFile();
+		String path = UserServices.class.getResource("/").getFile();
+		path = path.substring(0,path.indexOf("WEB-INF")+"WEB-INF".length())+"/data"+"/user.json";
+		System.out.println(path);
 		userdao = new UserDao(path);
 	}
-	
+	public String login(User loginuser){
+		return userdao.check(loginuser);
+	}
 	public boolean addUser(User power,User adduser){
 			return userdao.add(power,adduser);
 

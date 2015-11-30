@@ -1,7 +1,6 @@
 package com.cosine.domain;
 
 import com.alibaba.fastjson.JSON;
-import com.cosine.utils.ParseMD5;
 
 /**
  * 
@@ -21,12 +20,12 @@ public class User {
 	public User(String username, String password) {
 		super();
 		this.username = username;
-		this.password = ParseMD5.parseStrToMd5L32(password);
+		this.password = password;
 	}
 	public User(String username, String password, String role) {
 		super();
 		this.username = username;
-		this.password = ParseMD5.parseStrToMd5L32(password);
+		this.password = password;
 		this.role = role;
 	}
 	public String getUsername() {
@@ -39,7 +38,7 @@ public class User {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = ParseMD5.parseStrToMd5L32(password);
+		this.password = password;
 ;
 	}
 	public String getRole() {
@@ -51,8 +50,6 @@ public class User {
 	public String toJsonString(){
 		return JSON.toJSONString(this);
 	}
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,6 +79,9 @@ public class User {
 			return false;
 		return true;
 	}
+	
+
+	
 
 	
 	
