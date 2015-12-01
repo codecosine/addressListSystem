@@ -1,11 +1,6 @@
-	<div class="sidebar" id="sidebar">
-					<script type="text/javascript">
-						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-					</script>
-
-							
+	<div class="sidebar" id="sidebar">				
 					<ul class="nav nav-list">
-						<li class="active">
+						<li>
 							<a ui-sref="home">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 控制台 </span>
@@ -40,7 +35,7 @@
 									</a>
 								</li>
 								<li>
-								<a ui-sref="home.dropzone" >																			
+								<a ui-sref=".dropzone" >																			
 										<i class="icon-double-angle-right"></i>
 										信息备份/恢复
 									</a>
@@ -49,28 +44,14 @@
 						</li>
 
 						<li>
-							<a href="#" class="dropdown-toggle">
+							<a ui-sref=".super" >
 								<i class="icon-list"></i>
 								<span class="menu-text"> 超级管理员 </span>
 
 								<b class="arrow icon-angle-down"></b>
 							</a>
 
-							<ul class="submenu">
-								<li class="active">
-									<a href="tables.html">
-										<i class="icon-double-angle-right"></i>
-										账号信息管理
-									</a>
-								</li>
-								<li class="active">
-									<a href="dropzone.html">
-										<i class="icon-double-angle-right"></i>
-										账号授权管理
-									</a>
-								</li>
-
-							</ul>
+							
 						</li>
 
 				

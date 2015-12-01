@@ -4,7 +4,7 @@
 		<div class="login_box col-sm-8" >
 			<form class="form-horizontal" name="loginform" ng-controller="loginCtrl" ng-submit="login(userInfo)">
 				<div class="form-group">
-					<label class="col-sm-5 control-label h3"><strong>学生通讯录管理系统</strong></label>
+					<label class="col-sm-8 control-label h4"><strong>学生通讯录管理系统</strong></label>
 				</div>
 				<div class="form-group">
 					<label for="inputUser" class="col-sm-5 control-label"><strong>学号</strong></label>
@@ -19,20 +19,14 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-4 col-sm-5">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"> <strong>RemeberMe(BETA)</strong>
-							</label>
-							<button type="submit" class="btn btn-primary" >登录</button>
-							<button type="button" ng-click="resetForm()" class="btn btn-info">重置</button>
-
-						</div>
+					<label class="col-sm-5"></label>
+					<div class="col-sm-5">
+						<button type="submit" class="btn btn-primary" >登录</button>
+						<button type="button" ng-click="resetForm()" class="btn btn-info">重置</button>
 					</div>
 				</div>
 			</form>
 		</div>
-
 
 	</div>
 </div>

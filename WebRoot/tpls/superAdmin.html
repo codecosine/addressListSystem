@@ -1,0 +1,181 @@
+<div class="main-content" >
+
+	<div class="page-content">
+		<div class="page-header">
+			<h1>
+								超级管理员
+								
+							</h1>
+		</div>
+		<!-- /.page-header -->
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+
+				<div class="container">
+					<div class="row">
+						<!-- /.grid start -->
+						<div class="input-group pull-right global-search">
+							<label class="input-group-addon">全局搜索信息</label>
+							<input type="text" class="form-control" ng-model="vm.filter.$" />
+						</div>
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th ng-repeat="column in vm.columns" ng-click="vm.sort.toggle(column)" ng-class="{sortable: column.sortable !== false}">
+										{{column.label}}
+										<i ng-if="column.name === vm.sort.column && vm.sort.direction" class="glyphicon {{vm.sort.direction|orderClass}}"></i>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input type="text" ng-model="vm.filter.id" class="form-control" />
+									</td>
+									<td>
+										<input type="text" ng-model="vm.filter.name" class="form-control" />
+									</td>
+									<td>
+										<input type="text" ng-model="vm.filter.sex" class="form-control" />
+									</td>
+									<td>
+										<input type="text" ng-model="vm.filter.sclass" class="form-control" />
+									</td>
+									<td>
+										<input type="text" ng-model="vm.filter.phone" class="form-control" />
+									</td>
+									<td>
+										<input type="text" ng-model="vm.filter.address" class="form-control" />
+									</td>
+									<td>
+										<input type="text" ng-model="vm.filter.party" class="form-control" />
+									</td>
+									<td>
+										
+								
+					        <span class="btn btn-primary btn-xs" title="添加" ng-click="">
+					          <i class="glyphicon glyphicon-pencil"></i>
+					          	添加
+					        </span>
+					        
+									</td>
+								</tr>
+								<tr ng-repeat="item in vm.items|filter:vm.filter|orderBy:vm.sort.column:vm.sort.direction===-1|paging:vm.page.index:vm.page.size">
+									<td>
+										<span ng-if="!item.$editing">	{{item.id}}</span>
+										<input type="text" class="form-control" ng-model="item.id" ng-if="item.$editing" />
+
+									</td>
+									<td>
+										<span ng-if="!item.$editing">{{item.name}}</span>
+										<input type="text" class="form-control" ng-model="item.name" ng-if="item.$editing" />
+									</td>
+									<td>
+										<span ng-if="!item.$editing">{{item.sex}}</span>
+										<input type="text" class="form-control" ng-model="item.sex" ng-if="item.$editing" />
+									</td>
+									<td>
+										<span ng-if="!item.$editing">{{item.sclass}}</span>
+										<input type="text" class="form-control" ng-model="item.sclass" ng-if="item.$editing" />
+									</td>
+									<td>
+										<span ng-if="!item.$editing">{{item.phone}}</span>
+										<input type="text" class="form-control" ng-model="item.phone" ng-if="item.$editing" />
+									</td>
+									<td>
+										<span ng-if="!item.$editing">{{item.address}}</span>
+										<input type="text" class="form-control" ng-model="item.address" ng-if="item.$editing" />
+									</td>
+									<td>
+										<span ng-if="!item.$editing">{{item.party}}</span>
+										<input type="text" class="form-control" ng-model="item.party" ng-if="item.$editing" />
+									</td>
+
+									<td>
+										<span class="btn btn-primary btn-xs pull-right" title="编辑" ng-if="!item.$editing" ng-click="item.$editing = true">
+         						 <i class="glyphicon glyphicon-pencil"></i>
+      					  </span>
+										<span class="btn btn-success btn-xs pull-left" title="保存" ng-if="item.$editing" ng-click="item.$editing = false">
+         						 <i class="glyphicon glyphicon-floppy-disk"></i>        
+										</span>
+
+										<span class="btn btn-danger btn-xs pull-right" title="删除" ng-if="item.$editing">
+												<i class="icon-trash icon-1.5x icon-only"></i>
+										 </span>
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							
+							<div class="col-md-5">
+								<button class="btn btn-success btn-lg">确认操作</button>
+								<button class="btn btn-lg btn-warning">
+									<i class="icon-undo bigger-110"></i>
+									<span class="bigger-110 no-text-shadow">Undo</span>
+								</button>
+							</div>
+							<div class="col-md-5">
+								<div>
+											<ul class="pagination">
+												<li class="disabled">
+													<a href="#">
+														<i class="icon-double-angle-left"></i>
+													</a>
+												</li>
+
+												<li class="active">
+													<a href="#">1</a>
+												</li>
+
+												<li>
+													<a href="#">2</a>
+												</li>
+
+												<li>
+													<a href="#">3</a>
+												</li>
+
+												<li>
+													<a href="#">4</a>
+												</li>
+
+												<li>
+													<a href="#">5</a>
+												</li>
+
+												<li>
+													<a href="#">
+														<i class="icon-double-angle-right"></i>
+													</a>
+												</li>
+											</ul>
+										</div>
+								<pagination class="pagination" total-items="vm.items|filter:vm.filter|size" ng-model="vm.page.index" max-size="5" items-per-page="vm.page.size" class="pagination-sm pull-right" boundary-links="true"></pagination>
+							</div>
+						</div>
+
+						<h3>简要说明</h3> 非管理员无法就进行编辑等操作
+						<ul>
+							<li>搜索请直接在输入框内输入关键字</li>
+							<li>表单支持简单的学号排序</li>
+							<li>表单数据导出导入请<a ui-sref="home.dropzone">转至</a></li>
+						
+						</ul>
+						<!-- /.grid end -->
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.page-content -->
+</div>
+<!-- /.main-content -->
