@@ -83,12 +83,12 @@ loginModule.service('Session', function($http) {
 		this.userRole = null;
 	};
 	this.getSessionFromServer = function(){
-		$http.post('LoginServlet', userInfo)
+		/*$http.post('LoginServlet', userInfo)
 		.then(function(res) {
 			Session.create(res.data.password, res.data.username,
 				res.data.role);
 			return res.data.username;
-		});
+		});*/
 	};
 	this.toLocalString = function(){
 		console.log("localToString----");
@@ -96,4 +96,77 @@ loginModule.service('Session', function($http) {
 
 	};
 	return this;
+});
+
+/**
+ * 这里是数据表单版块
+ * 
+ */
+var gridModule = angular.module('gridModule', ['ngGrid']);
+gridModule.controller('StuListCtrl', function($scope) {
+    $scope.myData = [{name: "Moroni", age: 50},
+                     {name: "Tiancum", age: 43},
+                     {name: "Jacob", age: 27},
+                     {name: "Nephi", age: 29},
+                     {name: "Enos", age: 34}];
+    $scope.gridOptions = {
+        data: 'myData',
+        rowTemplate: '<div style="height: 100%"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
+            '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
+            '<div ng-cell></div>' +
+            '</div></div>',
+        multiSelect: false,
+        enableCellSelection: true,
+        enableRowSelection: false,
+        enableCellEdit: true,
+        enablePinning: true,
+        columnDefs: [{
+            field: 'index',
+            displayName: '序号',
+            width: 60,
+            pinnable: false,
+            sortable: false
+        }, {
+            field: 'id',
+            displayName: '学号',
+            enableCellEdit: true
+        }, {
+            field: 'name',
+            displayName: '姓名',
+            enableCellEdit: true,
+            width: 220
+        }, {
+            field: 'sclass',
+            displayName: '班级',
+            enableCellEdit: true,
+            width: 120
+        }, {
+            field: 'address',
+            displayName: '联系地址',
+            enableCellEdit: true,
+            width: 120
+        }, {
+            field: 'sex',
+            displayName: '性别',
+            enableCellEdit: true,
+            width: 120
+        }, {
+            field: 'party',
+            displayName: '党员身份',
+            enableCellEdit: true,
+            width: 120
+        }, {
+            field: 'bookId',
+            displayName: '操作',
+            enableCellEdit: false,
+            sortable: false,
+            pinnable: false,
+            cellTemplate: '<div><a ui-sref="bookdetail({bookId:row.getProperty(col.field)})" id="{{row.getProperty(col.field)}}">详情</a></div>'
+        }],
+        enablePaging: true,
+        showFooter: true,
+        totalServerItems: 'totalServerItems',
+        pagingOptions: $scope.pagingOptions,
+        filterOptions: $scope.filterOptions
+    };
 });

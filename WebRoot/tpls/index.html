@@ -1,15 +1,14 @@
 <div ui-view="topbar"></div>
 <div class="main-container" id="main-container">
-	<script type="text/javascript">
-		try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-	</script>
 
 	<div class="main-container-inner">
 		<a class="menu-toggler" id="menu-toggler" href="#">
 			<span class="menu-text"></span>
 		</a>
 		<div ui-view="sidebar"></div>
-		<div ui-view="main_content"></div>
+		<div ui-view="main_content">
+			
+		</div>
 	</div>
 	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 		<i class="icon-double-angle-up icon-only bigger-110"></i>

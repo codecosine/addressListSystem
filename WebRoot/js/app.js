@@ -1,7 +1,7 @@
 /*
  * 这一块主要是初始化system 还有路由的配置
  */
-var addSystem = angular.module('addSystem', ['ui.router', 'loginModule']);
+var addSystem = angular.module('addSystem', ['ui.router', 'loginModule','gridModule']);
 
 
 addSystem.run(function($rootScope,$state, $stateParams, Session ,AUTH_EVENTS) {
@@ -122,20 +122,11 @@ addSystem.config(function($httpProvider,$stateProvider, $urlRouterProvider) {
 				}
 			}
 		})
-		.state('stuinfo', {
-			url: '/home/stu',
+		.state('home.stuinfo', {
+			url: '/stuinfo',
 			views: {
-				'': {
-					templateUrl: 'tpls/index.html'
-				},
-				'topbar@stuinfo': {
-					templateUrl: 'tpls/header.html'
-				},
-				'sidebar@stuinfo': {
-					templateUrl: 'tpls/sidebar.html'
-				},
-				'main_content@stuinfo': {
-					templateUrl: 'tpls/main_content.html'
+				'main_content@home': {
+					templateUrl: 'tpls/lists.html'
 				}
 			}
 		})
