@@ -1,0 +1,39 @@
+<div class="main-content">
+	<div class="page-content">
+	<!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="page-header">
+							<h1>备份</h1>
+				</div>
+				<div class="alert alert-info">
+					<i class="icon-hand-right"></i> 
+					提示：下载的为json文件，信息为当前服务器存储的学生通讯录信息.
+				</div>
+
+				<button ng-click="download()" class="btn btn-purple">
+							<i class=" icon-cloud-download bigger-230"></i>	下载
+					</button>
+				<div class="space-30"></div>
+
+				
+				<div class="page-header">
+							<h1>恢复</h1>
+				</div>
+				<div class="alert alert-info">
+					<i class="icon-hand-right"></i> 
+					请上传合适格式的Json文件.
+				</div>
+				<input class="btn btn-pink" name="file" type="file" multiple="" />
+				<button ng-click="upload()" class="btn btn-pink">
+					<i class="icon-cloud-upload bigger-230"></i>确认上传
+				</button>
+				
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+</div>
+<!-- /.main-content -->
