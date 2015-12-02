@@ -38,19 +38,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");//处理响应编码
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("loginServlet");
+		
 		UserServices us = UserServices.getInstance();
 		String username = request.getParameter("username");
 		String password = ParseMD5.parseStrToMd5L16(request.getParameter("password"));
 		User loginuser = new User(username,password);
+		
+		//接收返回的参数
 		String role = us.login(loginuser);
-		String uuid = CommonUtils.uuid();
-		User resuser = new User(username,uuid,role);
-		request.getSession().setAttribute("isLogin", uuid);
+		System.out.println("loginServlet: loginresult:"+role);
+
+		User resuser = new User(username,null,role);
+		request.getSession().setAttribute("role", role);
 		request.getSession().setAttribute("username", username);
+		
 		response.getWriter().append(resuser.toJsonString());
 	}
 

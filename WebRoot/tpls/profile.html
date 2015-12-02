@@ -1,22 +1,14 @@
 <div class="main-content">
-
 	<div class="page-content">
 		<div class="page-header">
-			<h1>
-								用户信息页面
-								
-							</h1>
+			<h1>用户信息页面	</h1>
 		</div>
 		<!-- /.page-header -->
-
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-	
 				<div class="clearfix">
 					<div class="alert alert-success no-margin">
-					
-
 						<i class="icon-ok bigger-120 blue"></i> 恭喜你，登录成功，请继续您的操作。
 					</div>
 
@@ -30,7 +22,7 @@
 													<div class="profile-info-name"> 用户名 </div>
 
 													<div class="profile-info-value">
-														<span>游客</span>
+														<span>{{user.username}}</span>
 													</div>
 												</div>
 
@@ -42,28 +34,10 @@
 														<span>Amsterdam</span>
 													</div>
 												</div>
-
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Age </div>
-
-													<div class="profile-info-value">
-														<span>38</span>
-													</div>
-												</div>
-
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Joined </div>
-
-													<div class="profile-info-value">
-														<span>20/06/2010</span>
-													</div>
-												</div>
-
 												<div class="profile-info-row">
 													<div class="profile-info-name"> 登录时间 </div>
-
 													<div class="profile-info-value">
-														<span>3 hours ago</span>
+														<span>{{getDate()}}</span>
 													</div>
 												</div>
 											</div>

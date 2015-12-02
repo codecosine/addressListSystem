@@ -4,19 +4,21 @@
  */
 var loginModule = angular.module("loginModule", []);
 loginModule.controller('loginCtrl', function($scope, $http, $rootScope, AUTH_EVENTS, AuthService) {
-
 	$scope.userInfo = {
 		username: '',
 		password: ''
 	};
+	$scope.loginfail = false;
 	$scope.login = function(userInfo) {
-		AuthService.login(userInfo).then(function(username) {
-			if (!username === "guest") {
+		AuthService.login(userInfo).then(function(data) {
+			if (!(data.role === "guest")) {
 				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+				$rootScope.setCurrentUser(data.username);
 			} else {
-				$rootScopt.$broadcast(AUTH_EVENTS.passwordError);
+				$scope.loginfail = true;
+				console.log("loginfail=true");
+				//$rootScopt.$broadcast(AUTH_EVENTS.passwordError);
 			}
-			$rootScope.setCurrentUser(username);
 		}, function() {
 			$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 		});
@@ -53,7 +55,7 @@ loginModule.factory('AuthService', function($http, Session) {
 			.then(function(res) {
 				Session.create(res.data.password, res.data.username,
 					res.data.role);
-				return res.data.username;
+				return res.data;
 			});
 	}
 

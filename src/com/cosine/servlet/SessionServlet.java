@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cosine.domain.User;
-import com.cosine.services.UserServices;
-import com.cosine.utils.ParseMD5;
 
 /**
  * Servlet implementation class LoginServlet
@@ -38,11 +36,16 @@ public class SessionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		String uuid = (String) request.getSession().getAttribute("isLogin");
-
-		response.getWriter().append(uuid);
+		response.setContentType("text/html;charset=UTF-8");//处理响应编码
+		request.setCharacterEncoding("UTF-8");
+		String role = (String)request.getSession().getAttribute("role");
+		String username = (String)request.getSession().getAttribute("username");
+		if(username!=null){
+			User reuser = new User(username,null,role);
+			response.getWriter().append(reuser.toJsonString());
+		}
+		System.out.println("session中并没有记录到用户登录。");
+		
 	}
 
 }

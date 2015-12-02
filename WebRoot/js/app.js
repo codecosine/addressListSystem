@@ -8,8 +8,6 @@ addSystem.run(function($rootScope,$state, $stateParams, Session ,AUTH_EVENTS) {
 	//root作用域一些默认的参数生成以及绑定
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
-	
-	
 	$rootScope.user = {
 		username:'游客'
 	};
@@ -38,6 +36,7 @@ addSystem.run(function($rootScope,$state, $stateParams, Session ,AUTH_EVENTS) {
 	      console.log("--serverERROR!!!!");
 	});
 	$rootScope.$on(	AUTH_EVENTS.passwordError, function(event) {
+		
 	      console.log("--LoginFailed,passwordError");
 	});
 
