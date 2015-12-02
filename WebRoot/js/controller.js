@@ -1,5 +1,5 @@
 /**
- * 这里是登录模块
+ * 这里是登录表单
  * @type {[type]}
  */
 var loginModule = angular.module("loginModule", []);
@@ -14,7 +14,9 @@ loginModule.controller('loginCtrl', function($scope, $http, $rootScope, AUTH_EVE
 			if (!(data.role === "guest")) {
 				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 				$rootScope.setCurrentUser(data.username);
+				$rootScope.first = true;
 			} else {
+
 				$scope.loginfail = true;
 			}
 		}, function() {
@@ -36,6 +38,13 @@ loginModule.constant('AUTH_EVENTS', {
 	sessionTimeout: 'auth-session-timeout',
 	notAuthenticated: 'auth-not-authenticated',
 	notAuthorized: 'auth-not-authorized'
+});
+loginModule.constant('USER_ROLES', {
+	all:'*',
+  admin: 'admin',
+  teacher: 'teacher',
+  student: 'student',
+  guest: 'guest'
 });
 
 
@@ -70,7 +79,8 @@ loginModule.factory('AuthService', function($http, Session) {
 });
 
 
-loginModule.service('Session', function($http) {
+loginModule.service('Session', function($http,$rootScope) {
+	this.userRole = "guest";
 	this.create = function(sessionId, userId, userRole) {
 		this.id = sessionId;
 		this.userId = userId;
@@ -85,17 +95,19 @@ loginModule.service('Session', function($http) {
 		this.userRole = null;
 	};
 	this.getSessionFromServer = function() {
-		/*$http.post('LoginServlet', userInfo)
-		.then(function(res) {
-			Session.create(res.data.password, res.data.username,
+		var that = this;
+		$http.post('SessionServlet').then(function(res) {
+			that.create(res.data.password, res.data.username,
 				res.data.role);
-			return res.data.username;
-		});*/
+			if(res.data.username){
+				$rootScope.setCurrentUser(res.data.username);
+				$rootScope.first = true;
+			}
+		});
 	};
 	this.toLocalString = function() {
 		console.log("localToString----");
 		console.log("sessionid=" + this.id + ",userId=" + this.userId);
-
 	};
 	return this;
 });

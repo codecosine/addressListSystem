@@ -40,11 +40,15 @@ public class SessionServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String role = (String)request.getSession().getAttribute("role");
 		String username = (String)request.getSession().getAttribute("username");
+		String uuid = (String)request.getSession().getAttribute("uuid");
+
 		if(username!=null){
-			User reuser = new User(username,null,role);
+			User reuser = new User(username,uuid,role);
 			response.getWriter().append(reuser.toJsonString());
+		}else{
+			System.out.println("session中并没有记录到用户登录。");
+
 		}
-		System.out.println("session中并没有记录到用户登录。");
 		
 	}
 
