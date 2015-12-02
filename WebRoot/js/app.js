@@ -234,7 +234,8 @@ addSystem.config(function($httpProvider, $stateProvider, $urlRouterProvider,USER
 				}
 			},
 			data: {
-		      authorizedRoles: [USER_ROLES.all]
+		      authorizedRoles: [USER_ROLES.admin, USER_ROLES.teacher, USER_ROLES.student, USER_ROLES.guest]
+
 		    }
 		});
 

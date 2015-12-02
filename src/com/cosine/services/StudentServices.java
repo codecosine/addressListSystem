@@ -3,6 +3,7 @@ package com.cosine.services;
 import org.junit.Test;
 
 import com.cosine.dao.StudentDao;
+import com.cosine.domain.Group;
 import com.cosine.domain.Student;
 
 /**
@@ -55,5 +56,10 @@ public class StudentServices {
 
 	public boolean rollback() {
 		return studentdao.rollback();
+	}
+
+	public Group<Student> getALLStudents() {
+		// TODO Auto-generated method stub
+		return studentdao.getgroup();
 	}
 }

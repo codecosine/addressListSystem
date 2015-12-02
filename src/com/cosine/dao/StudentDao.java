@@ -46,5 +46,8 @@ public class StudentDao {
 		group = JSON.parseObject(FileUtils.readJson(path),new TypeReference<Group<Student>>(){});
 		return true;
 	}
+	public Group<Student> getgroup() {
+		return group;
+	}
 	
 }

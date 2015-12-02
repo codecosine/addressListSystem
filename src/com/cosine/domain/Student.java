@@ -7,14 +7,17 @@ public class Student {
 	private String sex;
 	private String phone;
 	private String address;
-	private boolean party;
+	private String party;
 	public Student(){
 		
+	}
+	public Student(String id){
+		this.id = id;
 	}
 	
 
 	public Student(String id,String name, String sclass, String sex, String phone, String address,
-			boolean party) {
+			String party) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,11 +67,11 @@ public class Student {
 		this.address = address;
 	}
 
-	public boolean isParty() {
+	public String getParty() {
 		return party;
 	}
 
-	public void setParty(boolean party) {
+	public void setParty(String party) {
 		this.party = party;
 	}
 

@@ -1,17 +1,14 @@
 package com.cosine.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cosine.domain.Group;
 import com.cosine.domain.Student;
-import com.cosine.domain.User;
-import com.cosine.services.UserServices;
-import com.cosine.utils.ParseMD5;
+import com.cosine.services.StudentServices;
 
 
 @WebServlet("/StudentServlet")
@@ -22,23 +19,54 @@ public class StudentServlet extends BaseServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+   
     public String add(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-    	String powerrole = (String)request.getSession().getAttribute("role");
-		String powername = (String)request.getSession().getAttribute("username");
-		User power = new User(powername,null,powerrole);
-		
-		String addname = request.getParameter("username");
-		String password = ParseMD5.parseStrToMd5L16(request.getParameter("password"));
-		String addrole = request.getParameter("role");
-		User adduser = new User(addname,password,addrole);
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String sclass = request.getParameter("sclass");
+		String sex = request.getParameter("sex");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String party = request.getParameter("party");
 
-		UserServices.getInstance().addUser(power, adduser);
-    	UserServices.getInstance().commit();
+		Student add = new Student(id,name,sclass,sex,phone,address,party);
+		StudentServices.getInstance().addStudent(add);
+		StudentServices.getInstance().commit();
 		return null;
 	}
+    public String delete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String id = request.getParameter("id");
+		Student remove = new Student(id);
+		StudentServices.getInstance().removeStudent(remove);
+		return null;
+	}
+    public String edit(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String sclass = request.getParameter("sclass");
+		String sex = request.getParameter("sex");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String party = request.getParameter("party");
+
+		Student edit = new Student(id,name,sclass,sex,phone,address,party);
+		StudentServices.getInstance().editStudent(edit);
+		return null;
+	}
+    public String commit(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		StudentServices.getInstance().commit();
+		return null;
+	}
+    public String cancel(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		StudentServices.getInstance().rollback();
+		return null;
+	}
+    
 
 
 
