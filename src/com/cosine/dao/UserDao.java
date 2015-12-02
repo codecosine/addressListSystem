@@ -48,8 +48,8 @@ public class UserDao {
 		return "guest";
 	}
 	public boolean isAdmin(User user){
-		User admin = new User("cosine","cosine","admin");
-		return user.equals(admin);
+		
+		return user.getRole().equals("admin");
 	}
 	public boolean editPassWord(User oldpass,User newpass){	
 		isCommit = false;

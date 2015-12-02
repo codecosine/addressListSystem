@@ -1,19 +1,21 @@
 package com.cosine.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cosine.domain.Group;
-import com.cosine.domain.Student;
+import com.cosine.domain.User;
+import com.cosine.services.UserServices;
+import com.cosine.utils.ParseMD5;
 
 /**
  * Servlet implementation class StudentServlet
  */
-@WebServlet("/StudentServlet")
+@WebServlet("/UserServlet")
 public class UserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,37 +29,59 @@ public class UserServlet extends BaseServlet {
 
     public String add(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+    	String powerrole = (String)request.getSession().getAttribute("role");
+		String powername = (String)request.getSession().getAttribute("username");
+		User power = new User(powername,null,powerrole);
 		
+		String addname = request.getParameter("username");
+		String password = ParseMD5.parseStrToMd5L16(request.getParameter("password"));
+		String addrole = request.getParameter("role");
+		User adduser = new User(addname,password,addrole);
+
+		UserServices.getInstance().addUser(power, adduser);
+    	UserServices.getInstance().commit();
 		return null;
 	}
 
-	public String append(HttpServletRequest request, HttpServletResponse response)
+	public String delete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String powerrole = (String)request.getSession().getAttribute("role");
+		String powername = (String)request.getSession().getAttribute("username");
+		User power = new User(powername,null,powerrole);
 		
+		String removename = request.getParameter("username");
+		String removerole = request.getParameter("role");
+		User removeuser = new User(removename,null,removerole);
+
+		UserServices.getInstance().removeUser(power, removeuser);
+    	UserServices.getInstance().commit();
 		return null;
 	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=UTF-8");//处理响应编码
-		request.setCharacterEncoding("UTF-8");
-		Group<Student> group = new Group<Student>();
-		Student stu3 = new Student("3114004922","御坂3号","2班","男","1323220000","广州",true);
-		Student stu2 = new Student("3114004923","御坂2号","2班","男","1323220000","广州",true);
-		Student stu1 = new Student("3114004921","御坂1号","2班","男","1323220000","广州",true);
+	public String editRole(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String powerrole = (String)request.getSession().getAttribute("role");
+		String powername = (String)request.getSession().getAttribute("username");
+		User power = new User(powername,null,powerrole);
+		
+		String name = request.getParameter("username");
+		String role = request.getParameter("role");
+		User editUser = new User(name,null,role);
 
-		group.add(stu1);
-		group.add(stu2);
-		group.add(stu3);
-
-		response.getWriter().append(group.toJsonString());
+		UserServices.getInstance().editRole(power, editUser);
+    	UserServices.getInstance().commit();
+		return null;
 	}
+	public String editPass(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String username = (String)request.getSession().getAttribute("username");
+		String oldpassword = ParseMD5.parseStrToMd5L16(request.getParameter("oldpassword"));
+		String newpassword = ParseMD5.parseStrToMd5L16(request.getParameter("newpassword"));
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		UserServices.getInstance().editPassword(username,oldpassword,newpassword);
+    	UserServices.getInstance().commit();
+		return null;
 	}
+	
+
 
 }

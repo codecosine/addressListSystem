@@ -43,6 +43,7 @@ public class UserServices {
 
 	}
 	public boolean editRole(User power,User edituser){
+			
 			return userdao.editRole(power, edituser);
 	}
 
@@ -53,12 +54,15 @@ public class UserServices {
 		User now = new User();
 		now.setPassword(newpwd);
 		now.setUsername(username);
+		
 		return userdao.editPassWord(old, now);
 	}
-	public void commit(){
-		userdao.commit();
+	public boolean commit(){
+		return userdao.commit();
 	}
-	public void cancel(){
-		userdao.rollback();
+	public boolean rollback(){
+		return userdao.rollback();
 	}
+	
+	
 }
