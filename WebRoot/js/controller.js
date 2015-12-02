@@ -16,14 +16,11 @@ loginModule.controller('loginCtrl', function($scope, $http, $rootScope, AUTH_EVE
 				$rootScope.setCurrentUser(data.username);
 			} else {
 				$scope.loginfail = true;
-				console.log("loginfail=true");
-				//$rootScopt.$broadcast(AUTH_EVENTS.passwordError);
 			}
 		}, function() {
 			$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 		});
 	};
-
 	$scope.resetForm = function() {
 		$scope.userInfo = {
 			username: "",
@@ -40,12 +37,10 @@ loginModule.constant('AUTH_EVENTS', {
 	notAuthenticated: 'auth-not-authenticated',
 	notAuthorized: 'auth-not-authorized'
 });
-loginModule.constant('USER_ROLES', {
-	all: '*',
-	admin: 'admin',
-	editor: 'editor',
-	guest: 'guest'
-});
+
+
+
+
 //一些操作的身份认证授权服务 登录的具体实现逻辑应该在这里，登录认证应该解耦，登录Controller应该只关心表单的事情
 loginModule.factory('AuthService', function($http, Session) {
 	var authService = {};
@@ -73,11 +68,16 @@ loginModule.factory('AuthService', function($http, Session) {
 	};
 	return authService;
 });
+
+
 loginModule.service('Session', function($http) {
 	this.create = function(sessionId, userId, userRole) {
 		this.id = sessionId;
 		this.userId = userId;
 		this.userRole = userRole;
+	};
+	this.getRole = function(){
+		return this.userRole;
 	};
 	this.destroy = function() {
 		this.id = null;

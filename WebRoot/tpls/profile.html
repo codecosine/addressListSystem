@@ -8,8 +8,11 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="clearfix">
-					<div class="alert alert-success no-margin">
+					<div ng-if="getRole()" class="alert alert-success no-margin">
 						<i class="icon-ok bigger-120 blue"></i> 恭喜你，登录成功，请继续您的操作。
+					</div>
+					<div ng-if="!getRole()" class="alert alert-danger no-margin">
+						<i class="icon-bug bigger-120 blue"></i> 你尚未登录，很多操作无法进行，请返回<a ui-sref="login">登录页面</a>进行登录后再操作
 					</div>
 
 					<div class="hr dotted"></div>
@@ -30,8 +33,7 @@
 													<div class="profile-info-name"> 权限 </div>
 
 													<div class="profile-info-value">
-														<span>Netherlands</span>
-														<span>Amsterdam</span>
+														<span>{{getRole()}}</span>
 													</div>
 												</div>
 												<div class="profile-info-row">

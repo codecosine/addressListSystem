@@ -49,9 +49,10 @@ public class LoginServlet extends HttpServlet {
 		//接收返回的参数
 		String role = us.login(loginuser);
 		System.out.println("loginServlet: loginresult:"+role);
-
-		User resuser = new User(username,null,role);
+		String uuid = CommonUtils.uuid();
+		User resuser = new User(username,uuid,role);
 		request.getSession().setAttribute("role", role);
+		request.getSession().setAttribute("uuid", uuid);
 		request.getSession().setAttribute("username", username);
 		
 		response.getWriter().append(resuser.toJsonString());

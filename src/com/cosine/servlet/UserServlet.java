@@ -14,13 +14,13 @@ import com.cosine.domain.Student;
  * Servlet implementation class StudentServlet
  */
 @WebServlet("/StudentServlet")
-public class StudentServlet extends BaseServlet {
+public class UserServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentServlet() {
+    public UserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

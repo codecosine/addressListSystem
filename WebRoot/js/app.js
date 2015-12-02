@@ -3,21 +3,42 @@
  */
 var addSystem = angular.module('addSystem', ['ui.router', 'loginModule','gridModule','chartsModule']);
 
+/**
+ * 定义一些没什么用的全局函数
+ */
 
 addSystem.run(function($rootScope,$state, $stateParams, Session ,AUTH_EVENTS) {
 	//root作用域一些默认的参数生成以及绑定
 	$rootScope.$state = $state;
 	$rootScope.$stateParams = $stateParams;
+	
 	$rootScope.user = {
 		username:'游客'
 	};
+	
+	//全局函数绑定，这里不应该涉及到任何权限的设置
 	$rootScope.setCurrentUser = function(username){
 		$rootScope.user = {
 				username:username
-			};
+		};
 	};
 	$rootScope.test = function(){
 		Session.toLocalString();
+	};
+	$rootScope.getDate = function(){
+		var myDate = new Date();
+		return myDate.toLocaleString(); 
+	};
+	$rootScope.getRole = function(){
+		var role = Session.getRole();
+		if(!role||role==="guest"){
+	 	    return false;
+		}else{
+		    return role;
+		}
+	};
+	$rootScope.destory = function(){
+		Session.destory();
 	};
 	
 	//尝试从服务器获取已经存在的session并跳转页面
@@ -35,10 +56,7 @@ addSystem.run(function($rootScope,$state, $stateParams, Session ,AUTH_EVENTS) {
 	$rootScope.$on(AUTH_EVENTS.loginFailed, function(event) {
 	      console.log("--serverERROR!!!!");
 	});
-	$rootScope.$on(	AUTH_EVENTS.passwordError, function(event) {
-		
-	      console.log("--LoginFailed,passwordError");
-	});
+	
 
 });
 
@@ -129,6 +147,14 @@ addSystem.config(function($httpProvider,$stateProvider, $urlRouterProvider) {
 				}
 			}
 		})
+		.state('home.super', {
+			url: '/super',
+			views: {
+				'main_content@home': {
+					templateUrl: 'tpls/superAdmin.html'
+				}
+			}
+		})
 		.state('home.charts', {
 			url: '/charts',
 			views: {
@@ -165,3 +191,6 @@ addSystem.factory('Test',[function(){
 	return sudo;
 	
 }]);
+
+
+
