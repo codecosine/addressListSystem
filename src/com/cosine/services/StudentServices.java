@@ -30,7 +30,7 @@ public class StudentServices {
 	@Test
 	public void init() {
 		String path = StudentServices.class.getResource("/").getFile();
-		path = path.substring(0, path.indexOf("WEB-INF") + "WEB-INF".length()) + "/data" + "/student.json";
+		path = path.substring(0, path.indexOf("WEB-INF") + "WEB-INF".length()) + "/data" + "/students.json";
 		System.out.println(path);
 		studentdao = new StudentDao(path);
 	}

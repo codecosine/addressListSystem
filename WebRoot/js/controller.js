@@ -123,13 +123,15 @@ gridModule.controller('StuListCtrl', function($scope) {
 		size: 5,
 		index: 1
 	};
+	vm.addnew = function(){
+		
+	};
 	vm.sort = {
 		column: 'id',
 		direction: -1,
 		toggle: function(column) {
 			if (column.sortable === false)
 				return;
-
 			if (this.column === column.name) {
 				this.direction = -this.direction || -1;
 			} else {

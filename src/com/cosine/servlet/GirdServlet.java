@@ -15,7 +15,7 @@ import com.cosine.services.StudentServices;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/SessionServlet")
+@WebServlet("/GirdServlet")
 public class GirdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,8 +42,6 @@ public class GirdServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Group<Student> group = StudentServices.getInstance().getALLStudents();
 		response.getWriter().append(group.toJsonString());
-
-		
 	}
 
 }
