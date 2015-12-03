@@ -167,7 +167,12 @@
 										</li>
 									</ul>
 								</div>
-
+							<div ng-if="errorf"class="alert alert-danger no-margin">
+								<i class="icon-exclamation-sign bigger-120 blue"></i>操作失败!出现了一些问题
+							</div>
+							<div ng-if="successf"class="alert alert-success no-margin">
+								<i class="icon-exclamation-sign bigger-120 blue"></i>操作成功
+							</div>
 
    	    <script src="framework/ng-grid-2.0.12/ng-grid.debug.js"></script>
 							</div>

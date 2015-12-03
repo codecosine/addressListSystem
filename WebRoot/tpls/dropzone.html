@@ -1,35 +1,45 @@
 <div class="main-content">
 	<div class="page-content">
-	<!-- /.page-header -->
-		<div class="row">
+		<!-- /.page-header -->
+		<div class="row" ng-controller="dropzoneCtrl">
 			<div class="col-xs-12">
 				<div class="page-header">
-							<h1>备份</h1>
+					<h1>备份</h1>
 				</div>
 				<div class="alert alert-info">
-					<i class="icon-hand-right"></i> 
-					提示：下载的为json文件，信息为当前服务器存储的学生通讯录信息.
+					<i class="icon-hand-right"></i> 提示：下载的为json格式，信息为当前服务器存储的学生通讯录信息.在文本框内，可以自行复制保存。
 				</div>
+				<textarea class="form-control" rows="5" ng-model="downloaddata"></textarea>
 
 				<button ng-click="download()" class="btn btn-purple">
-							<i class=" icon-cloud-download bigger-230"></i>	下载
-					</button>
+					<i class=" icon-cloud-download bigger-230"></i> 下载
+				</button>
+				<div ng-if="errord" class="alert alert-danger no-margin">
+					<i class="icon-exclamation-sign bigger-120 blue"></i>下载失败!作者中出了bug
+				</div>
+				<div ng-if="successd" class="alert alert-success no-margin">
+					<i class="icon-exclamation-sign bigger-120 blue"></i>下载成功
+				</div>
 				<div class="space-30"></div>
 
-				
 				<div class="page-header">
-							<h1>恢复</h1>
+					<h1>恢复</h1>
 				</div>
 				<div class="alert alert-info">
-					<i class="icon-hand-right"></i> 
-					请上传合适格式的Json文件.
+					<i class="icon-hand-right"></i> 请在文本框内输入合适格式的Json文件.
 				</div>
-				<div class="wysiwyg-editor" id="editor1" contenteditable="true"></div>
+				<textarea class="form-control" rows="5" ng-model="uploaddata"></textarea>
 				<input class="btn btn-pink" name="file" type="file" multiple="" />
 				<button ng-click="upload()" class="btn btn-pink">
 					<i class="icon-cloud-upload bigger-230"></i>确认上传
 				</button>
-				
+				<div ng-if="erroru" class="alert alert-danger no-margin">
+					<i class="icon-exclamation-sign bigger-120 blue"></i>上传失败!bug
+				</div>
+				<div ng-if="successu" class="alert alert-success no-margin">
+					<i class="icon-exclamation-sign bigger-120 blue"></i>上传成功
+				</div>
+
 			</div>
 			<!-- /.col -->
 		</div>

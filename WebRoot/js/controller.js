@@ -116,12 +116,35 @@ loginModule.service('Session', function($http,$rootScope) {
  * 这里是数据表单版块
  * 
  */
+
 var gridModule = angular.module('gridModule', []);
+gridModule.controller('dropzoneCtrl', function($scope,$rootScope,$http) {
+	$scope.downloaddata = {
+	};
+	$scope.uploaddata = {
+	};
+	$scope.errord= false;
+	$scope.successd = false;
+	
+	$scope.erroru= false;
+	$scope.successu = false;
+	$scope.upload = function(){
+		$http.post('StudentServlet',{data:uploaddata,method:"commitAll"}).then(function(res) {
+			$scope.successu = true;
+		});;
+
+	};
+	$scope.download = function(){
+		$http.post('GirdServlet').then(function(res) {
+				$scope.downloaddata = res.data;
+				$scope.successd = true;
+		});
+	};
+});
 gridModule.controller('passCtrl', function($scope,$rootScope,$http) {
-	var a = $rootScope.user.username +"" ;
-	console.log(a);
+	var name = $rootScope.user.username + "";
 	$scope.pass = {
-		username: a,
+		username: name,
 		oldpass:'',
 		newpass:'',
 		method:'editPass'
@@ -148,6 +171,8 @@ gridModule.controller('StuListCtrl', function($scope,$http) {
 		size: 5,
 		index: 1
 	};
+	$scope.errorf= false;
+	$scope.successf = false;
 	vm.setindex = function(index){
 		vm.page.index = index;
 	};
@@ -158,7 +183,14 @@ gridModule.controller('StuListCtrl', function($scope,$http) {
 	};
 	vm.commit = function(){
 		var data = JSON.stringify(vm.items);
-		$http.post('StudentServlet',{data:data,method:"commitAll"});
+		$http.post('StudentServlet',{data:data,method:"commitAll"}).then(function(res) {
+			
+			if(res.data){
+				$scope.successf = true;
+			}else{
+				$scope.errorf= true;
+			}
+		});;
 	};
 	vm.cancel = function(){
 		vm.items = vm.backup;

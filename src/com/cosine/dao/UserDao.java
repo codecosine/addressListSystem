@@ -40,9 +40,10 @@ public class UserDao {
 		if(group.contains(user)){
 			Iterator<User> it = group.iterator();
 			User edituser = it.next();
-			while(it.hasNext() && edituser!=user){
+			while(it.hasNext() && !edituser.equals(user)){
 				edituser = it.next();
 			}
+			System.out.println(edituser.toJsonString());
 			return edituser.getRole();
 		}
 		return "guest";

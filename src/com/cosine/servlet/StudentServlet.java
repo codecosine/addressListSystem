@@ -74,6 +74,7 @@ public class StudentServlet extends BaseServlet {
     	System.out.println(str);
 
 		StudentServices.getInstance().commitAllStudents(str);
+		response.getWriter().append("true");
 		return null;
 	}
     
