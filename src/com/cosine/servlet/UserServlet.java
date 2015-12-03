@@ -74,11 +74,14 @@ public class UserServlet extends BaseServlet {
 	public String editPass(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String username = (String)request.getSession().getAttribute("username");
-		String oldpassword = ParseMD5.parseStrToMd5L16(request.getParameter("oldpassword"));
-		String newpassword = ParseMD5.parseStrToMd5L16(request.getParameter("newpassword"));
-
-		UserServices.getInstance().editPassword(username,oldpassword,newpassword);
+		String oldpassword = ParseMD5.parseStrToMd5L16(request.getParameter("oldpass"));
+		String newpassword = ParseMD5.parseStrToMd5L16(request.getParameter("newpass"));
+		System.out.println("editpass:"+username);
+		boolean a = UserServices.getInstance().editPassword(username,oldpassword,newpassword);
+		Boolean result = new Boolean(a);
     	UserServices.getInstance().commit();
+    	System.out.println(result);
+		response.getWriter().append(result.toString());
 		return null;
 	}
 	

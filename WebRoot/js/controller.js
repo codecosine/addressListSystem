@@ -116,15 +116,52 @@ loginModule.service('Session', function($http,$rootScope) {
  * 这里是数据表单版块
  * 
  */
-var gridModule = angular.module('gridModule', ['ngGrid']);
-gridModule.controller('StuListCtrl', function($scope) {
+var gridModule = angular.module('gridModule', []);
+gridModule.controller('passCtrl', function($scope,$rootScope,$http) {
+	var a = $rootScope.user.username +"" ;
+	console.log(a);
+	$scope.pass = {
+		username: a,
+		oldpass:'',
+		newpass:'',
+		method:'editPass'
+	};
+	$scope.errorf= false;
+	$scope.successf = false;
+	
+	$scope.editpass = function(pass){
+		console.log(pass);
+
+		$http.post('UserServlet',pass).then(function(res) {
+			
+			if(res.data){
+				$scope.successf = true;
+			}else{
+				$scope.errorf= true;
+			}
+		});
+	};
+});
+gridModule.controller('StuListCtrl', function($scope,$http) {
 	var vm = $scope.vm = {};
 	vm.page = {
 		size: 5,
 		index: 1
 	};
-	vm.addnew = function(){
-		
+	vm.setindex = function(index){
+		vm.page.index = index;
+	};
+	vm.addstudent = {};
+	vm.addstu = function(addstudent){
+		vm.items.push(addstudent);
+		vm.addstudent = {};
+	};
+	vm.commit = function(){
+		var data = JSON.stringify(vm.items);
+		$http.post('StudentServlet',{data:data,method:"commitAll"});
+	};
+	vm.cancel = function(){
+		vm.items = vm.backup;
 	};
 	vm.sort = {
 		column: 'id',
@@ -140,7 +177,6 @@ gridModule.controller('StuListCtrl', function($scope) {
 			}
 		}
 	};
-	// 构建模拟数据
 	vm.columns = [{
 		label: '学号',
 		name: 'id',
@@ -174,19 +210,23 @@ gridModule.controller('StuListCtrl', function($scope) {
 		name: 'actions',
 		sortable: false
 	}];
-
+	
 	vm.items = [];
+	vm.backup = [];
+	$http.post('GirdServlet').then(function(res) {
+		vm.items = res.data;
+		vm.backup = res.data;		
+	});
 
 });
-var chartsModule = angular.module('chartsModule', ['ngGrid']);
+var chartsModule = angular.module('chartsModule',[]);
 chartsModule.controller('chartsCtrl', function($scope) {
 	$scope.option = {};
 	$scope.chartInit = function() {
 		var myChart = echarts.init(document.getElementById('main'));
 		var option = {
 			title: {
-				text: '某站点用户访问来源',
-				subtext: '纯属虚构',
+				text: '功能尚未完善，请期待',
 				x: 'center'
 			},
 			tooltip: {

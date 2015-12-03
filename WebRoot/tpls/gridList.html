@@ -1,4 +1,4 @@
-<div class="main-content" ng-controller="StuListCtrl">
+<div class="main-content" >
 	<div class="page-content">
 		<div class="page-header">
 			<h1>学生信息页面</h1>
@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="container">
-					<div class="row">
+					<div class="row" ng-controller="StuListCtrl">
 						<!-- /.grid start -->
 						<div class="input-group pull-right global-search">
 							<label class="input-group-addon">全局搜索信息</label>
@@ -15,14 +15,6 @@
 						</div>
 						<table class="table table-bordered table-hover">
 							<thead>
-								<tr>
-									<th ng-repeat="column in vm.columns" ng-click="vm.sort.toggle(column)" ng-class="{sortable: column.sortable !== false}">
-										{{column.label}}
-										<i ng-if="column.name === vm.sort.column && vm.sort.direction" class="glyphicon {{vm.sort.direction|orderClass}}"></i>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
 								<tr>
 									<td>
 										<input type="text" ng-model="vm.filter.id" class="form-control" />
@@ -46,14 +38,21 @@
 										<input type="text" ng-model="vm.filter.party" class="form-control" />
 									</td>
 									<td>
-										<span class="btn btn-primary btn-xs" title="添加" ng-click="">
-					                        <i class="glyphicon glyphicon-pencil"></i>添加
-					                    </span>
+					                       	特征搜索
 									</td>
 								</tr>
+								<tr>
+									<th ng-repeat="column in vm.columns" ng-click="vm.sort.toggle(column)" ng-class="{sortable: column.sortable !== false}">
+										{{column.label}}
+										<i ng-if="column.name === vm.sort.column && vm.sort.direction" class="glyphicon {{vm.sort.direction|orderClass}}"></i>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								
 								<tr ng-repeat="item in vm.items|filter:vm.filter|orderBy:vm.sort.column:vm.sort.direction===-1|paging:vm.page.index:vm.page.size">
 									<td>
-										<span ng-if="!item.$editing">	{{item.id}}</span>
+										<span ng-if="!item.$editing">{{item.id}}</span>
 										<input type="text" class="form-control" ng-model="item.id" ng-if="item.$editing" />
 									</td>
 									<td>
@@ -93,63 +92,91 @@
 										</span>
 									</td>
 								</tr>
+								<tr>
+											<td>
+												<input type="text" ng-model="vm.addstudent.id" class="form-control" />
+											</td>
+											<td>
+												<input type="text" ng-model="vm.addstudent.name" class="form-control" />
+											</td>
+											<td>
+												<input type="text" ng-model="vm.addstudent.sex" class="form-control" />
+											</td>
+											<td>
+												<input type="text" ng-model="vm.addstudent.sclass" class="form-control" />
+											</td>
+											<td>
+												<input type="text" ng-model="vm.addstudent.phone" class="form-control" />
+											</td>
+											<td>
+												<input type="text" ng-model="vm.addstudent.address" class="form-control" />
+											</td>
+											<td>
+												<input type="text" ng-model="vm.addstudent.party" class="form-control" />
+											</td>
+											<td>
+												<button type="button" class="btn btn-primary btn-xs" ng-click="vm.addstu(vm.addstudent)">添加信息</button>
+											</td>
+										</tr>
 							</tbody>
-						</table>
-						<div class="row">
+								
+						</table>	
 
+						<div class="row">
 							<div class="col-md-5">
-								<button class="btn btn-success btn-lg">确认操作</button>
+								<button class="btn btn-success btn-lg" ng-click="vm.commit()">确认操作</button>
 								<button class="btn btn-lg btn-warning">
 									<i class="icon-undo bigger-110"></i>
-									<span class="bigger-110 no-text-shadow">Undo</span>
+									<span class="bigger-110 no-text-shadow" ng-click="vm.cancel()">Cancel</span>
 								</button>
 							</div>
 							<div class="col-md-5">
-								<div>
+<div>
 									<ul class="pagination">
+										当前页:{{vm.page.index}}
 										<li class="disabled">
-											<a href="#">
+											<a ng-click="vm.setindex(vm.page.index-1)">
 												<i class="icon-double-angle-left"></i>
 											</a>
 										</li>
 
-										<li class="active">
-											<a href="#">1</a>
+										<li>
+											<a ng-click="vm.setindex(1)">1</a>
 										</li>
 
 										<li>
-											<a href="#">2</a>
+											<a ng-click="vm.setindex(2)">2</a>
 										</li>
 
 										<li>
-											<a href="#">3</a>
+											<a ng-click="vm.setindex(3)">3</a>
 										</li>
 
 										<li>
-											<a href="#">4</a>
+											<a ng-click="vm.setindex(4)">4</a>
 										</li>
 
 										<li>
-											<a href="#">5</a>
+											<a ng-click="vm.setindex(5)">5</a>
 										</li>
 
 										<li>
-											<a href="#">
+											<a ng-click="vm.setindex(vm.page.index+1)">
 												<i class="icon-double-angle-right"></i>
 											</a>
 										</li>
 									</ul>
 								</div>
-								<pagination class="pagination" total-items="vm.items|filter:vm.filter|size" ng-model="vm.page.index" max-size="5" items-per-page="vm.page.size" class="pagination-sm pull-right" boundary-links="true"></pagination>
+
+
+   	    <script src="framework/ng-grid-2.0.12/ng-grid.debug.js"></script>
 							</div>
 						</div>
-
-						<h3>简要说明</h3> 非管理员无法就进行编辑等操作
+						<h3>简要说明</h3> 每次操作完成后请点击确认或者取消
 						<ul>
-							<li>搜索请直接在输入框内输入关键字</li>
+							<li>搜索请直接在输入框内输入关键字，特征搜索在对应的输入框内</li>
 							<li>表单支持简单的学号排序</li>
 							<li>表单数据导出导入请<a ui-sref="home.dropzone">转至</a></li>
-
 						</ul>
 						<!-- /.grid end -->
 					</div>

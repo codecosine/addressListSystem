@@ -59,7 +59,9 @@ public class StudentServices {
 	}
 
 	public Group<Student> getALLStudents() {
-		// TODO Auto-generated method stub
 		return studentdao.getgroup();
+	}
+	public void commitAllStudents(String str) {
+		 studentdao.upload(str);
 	}
 }

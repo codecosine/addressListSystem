@@ -22,6 +22,7 @@ public class StudentServlet extends BaseServlet {
    
     public String add(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+    	System.out.println("add");
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String sclass = request.getParameter("sclass");
@@ -64,6 +65,15 @@ public class StudentServlet extends BaseServlet {
     public String cancel(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		StudentServices.getInstance().rollback();
+		return null;
+	}
+    public String commitAll(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+    	System.out.println("commitAll");
+		String str = request.getParameter("data");
+    	System.out.println(str);
+
+		StudentServices.getInstance().commitAllStudents(str);
 		return null;
 	}
     

@@ -13,7 +13,7 @@ addSystem.run(function($rootScope, $state, $stateParams, Session, AUTH_EVENTS ,A
 	$rootScope.$stateParams = $stateParams;
 
 	$rootScope.user = {
-		username: '游客'
+		username: 'guest'
 	};
 
 	//全局函数绑定，这里不应该涉及到任何权限的设置
@@ -39,7 +39,7 @@ addSystem.run(function($rootScope, $state, $stateParams, Session, AUTH_EVENTS ,A
 	};
 	$rootScope.first = false;
 	$rootScope.destory = function() {
-		Session.destory();
+		Session.destroy();
 	};
 
 	//尝试从服务器获取已经存在的session并跳转页面

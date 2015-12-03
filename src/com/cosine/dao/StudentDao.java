@@ -41,6 +41,9 @@ public class StudentDao {
 	public String download(){
 		return FileUtils.readJson(path);
 	}
+	public void upload(String str){
+		FileUtils.writeJson(path,str);
+	}
 	public boolean rollback(){
 		group = null;
 		group = JSON.parseObject(FileUtils.readJson(path),new TypeReference<Group<Student>>(){});

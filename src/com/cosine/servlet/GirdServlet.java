@@ -41,6 +41,7 @@ public class GirdServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");//处理响应编码
 		request.setCharacterEncoding("UTF-8");
 		Group<Student> group = StudentServices.getInstance().getALLStudents();
+		System.out.println(group.toJsonString());
 		response.getWriter().append(group.toJsonString());
 	}
 

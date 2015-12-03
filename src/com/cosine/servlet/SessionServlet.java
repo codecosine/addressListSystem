@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cosine.domain.User;
+import com.cosine.services.StudentServices;
 
 /**
  * Servlet implementation class LoginServlet
@@ -45,6 +46,9 @@ public class SessionServlet extends HttpServlet {
 		if(username!=null){
 			User reuser = new User(username,uuid,role);
 			response.getWriter().append(reuser.toJsonString());
+			StudentServices.getInstance().rollback();
+
+
 		}else{
 			System.out.println("session中并没有记录到用户登录。");
 
